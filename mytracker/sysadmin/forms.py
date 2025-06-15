@@ -9,13 +9,13 @@ from .models import healthfacility, Vaccination, Facilityadmin
 class healthfacilityform(forms.ModelForm):
     class Meta:
         model = healthfacility
-        fields = ['name', 'f_ID', 'location', 'contact_phone', 'contact_email']
+        fields = ['name', 'location', 'contact_phone', 'contact_email']
 
 
 class Vaccinationform(forms.ModelForm):
     class Meta:
         model = Vaccination
-        fields = ['name', 'v_ID', 'diseasePrevented', 'dose', 'description']
+        fields = ['name',  'diseasePrevented', 'dose', 'description']
 
 
 
