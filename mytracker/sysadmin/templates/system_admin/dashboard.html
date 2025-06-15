@@ -6,11 +6,12 @@
 
 <ul>
   <li><a href="{% url 'register_facility' %}">➕ Register New Health Facility</a></li>
-  <li><a href="{%url 'list_facilities'%}">🏥 View Registered Facilities</a></li>
   <li><a href="{% url 'create_vaccine' %}">💉 Register New Vaccine</a></li>
-  <li><a href="{% url 'list_vaccinations' %}">📋 View Vaccinations</a></li>
   <li><a href="{% url 'create_facility_admin' %}">👤 Create Facility Admin</a></li>
   <li><a href="{% url 'list_facility_admins' %}">👥 View Facility Admins</a></li>
+  <li><a href="{%url 'list_facilities'%}">🏥 View Registered Facilities</a></li>
+   <li><a href="{% url 'list_vaccinations' %}">📋 View Vaccinations</a></li>
 </ul>
+
 
 <a href="{% url 'logout' %}">🚪 Log Out</a>

@@ -16,7 +16,7 @@ def is_system_admin(user):
 @user_passes_test(lambda u: u.is_superuser)
 def dashboard (request):
    if request.user.is_superuser:
-     return render(request, 'sysadmin/dashboard.html' ,{
+     return render(request, 'system_admin/dashboard.html' ,{
        'admin_tools': True
      })
    else:
