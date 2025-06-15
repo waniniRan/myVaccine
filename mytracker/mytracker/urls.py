@@ -19,7 +19,7 @@ from django.urls import path
 from sysadmin import views
 
 urlpatterns = [
-    path('dashboard/',views.system_admin_dashboard, name='dashboard'),
+    path('dashboard/',views.dashboard_view, name='dashboard'),
     path('create-facility/', views.register_facility, name='register_facility'),
     path('facilities/', views.list_health_facilities, name='list_facilities'),
     path('create-vaccine/', views.create_vaccination, name='create_vaccine'),

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render 
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import healthfacilityform, Vaccinationform, FacilityAdminCreationForm
 from django.contrib.auth.models import User
@@ -15,7 +16,7 @@ def is_system_admin(user):
 @user_passes_test(lambda u: u.is_superuser)
 def dashboard (request):
    if request.user.is_superuser:
-     return render(request, 'system_admin/dashboard.html' ,{
+     return render(request, 'sysadmin/dashboard.html' ,{
        'admin_tools': True
      })
    else:
