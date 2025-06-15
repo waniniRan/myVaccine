@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from myVaccine.mytracker.sysadmin import views
 
 urlpatterns = [
+    path('dashboard/',views.system_admin_dashboard, name='dashboard'),
+    path('create-facility/', views.register_facility, name='register_facility'),
+    path('facilities/', views.list_health_facilities, name='list_facilities'),
+    path('create-vaccine/', views.create_vaccination, name='create_vaccine'),
+    path('vaccinations/', views.list_vaccinations, name='list_vaccinations'),
+    path('create-facility-admin/', views.create_facility_admin, name='create_facility_admin'),
+    path('facility-admins/', views.list_facility_admins, name='list_facility_admins'),
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,30 @@
+<h2>Registered Health Facilities</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Facility ID</th>
+            <th>Location</th>
+            <th>Contact_phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for facility in facilities %}
+            <tr>
+                <td>{{ facility.name }}</td>
+                <td>{{ facility.ID }}</td>
+                <td>{{ facility.location }}</td>
+                <td>{{ facility.contact_phone }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No facilities registered.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+
