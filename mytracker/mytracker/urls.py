@@ -22,14 +22,15 @@ from sysadmin import views
 
 urlpatterns = [
     path('',lambda request: redirect('dashboard'),name= 'dashboard'),
-    #path('dashboard/',views.system_admin_dashboard, name='dashboard'),
+    path('dashboard/',views.system_admin_dashboard, name='dashboard'),
     path('create-facility/', views.register_facility, name='register_facility'),
     path('facilities/', views.list_health_facilities, name='list_facilities'),
     path('create-vaccine/', views.create_vaccination, name='create_vaccine'),
     path('vaccinations/', views.list_vaccinations, name='list_vaccinations'),
     path('create-facility-admin/', views.create_facility_admin, name='create_facility_admin'),
     path('facility-admins/', views.list_facility_admins, name='list_facility_admins'),
-    #path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='/login.html/'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
     path('admin/', admin.site.urls),
 
 ]
