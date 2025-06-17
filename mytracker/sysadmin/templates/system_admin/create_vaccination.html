@@ -1,9 +1,10 @@
-<h2>Register New Vaccine</h2>
+<!-- system_admin/partials/add_vaccine_form.html -->
 
-<form method="post">
+<div class="card">
+  <h2>Add Vaccine</h2>
+  <form method="post" id="vaccine-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register Vaccine</button>
-</form>
-
-<a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+    <button type="submit">Submit</button>
+  </form>
+</div>

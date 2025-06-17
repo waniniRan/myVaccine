@@ -5,6 +5,7 @@ from .forms import healthfacilityform, Vaccinationform, FacilityAdminCreationFor
 from django.contrib.auth.models import User
 from .forms import FacilityAdminCreationForm
 from .models import healthfacility, Vaccination, Facilityadmin
+from django.http import HttpResponse
 
 
 
@@ -39,16 +40,24 @@ def register_facility(request):
     form = healthfacilityform(request.POST)
     if form.is_valid():
       form.save()
-      return redirect('dashboard')
+      return HttpResponse("Health facility registered successfully.")
   else:
     form = healthfacilityform()
-    return render(request, 'system_admin/register_facility.html', {'form': form})
+
+  if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/register_facility.html', {'form': form})
+
+  return render(request, 'system_admin/dashboard.html', {'form': form})
 #LIST FACILITIES
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def list_health_facilities(request):
    facilities =healthfacility.objects.all()
-   return render(request, 'system_admin/list_facilities.html',{'facilities': facilities}) 
+
+   if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/list_health_facilities.html', {'facilities': facilities}) 
+   
+   return render(request, 'system_admin/dashboard.html',{'facilities': facilities}) 
 #end
 
 #CREATE ADMIN
@@ -67,17 +76,24 @@ def create_facility_admin(request):
             facility = form.cleaned_data['facility']
             Facilityadmin.objects.create(user=user, facility=facility)
 
-            return redirect('dashboard')
+            return HttpResponse ("Facility Admin registered successfully.")
     else:
         form = FacilityAdminCreationForm()
     
-    return render(request, 'system_admin/create_facility_admin.html', {'form': form})
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/create_facility_admin.html', {'form': form})
+
+    return render(request, 'system_admin/dashboard.html', {'form': form})
 #LIST ADMINS
 login_required
 @user_passes_test(lambda u: u.is_superuser)
 def list_facility_admins(request):
     admins =Facilityadmin.objects.select_related('user', 'facility')
-    return render(request, 'system_admin/list_facility_admins.html', {'admins': admins})
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/list_facility_admins.html', {'admins': admins})
+    
+    return render(request, 'system_admin/dashboard.html', {'admins': admins})
 #end
 
 
@@ -89,16 +105,24 @@ def create_vaccination(request):
         form = Vaccinationform(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return HttpResponse("Vaccine registered successfully.")
     else:
         form = Vaccinationform()
-    return render(request, 'system_admin/create_vaccination.html', {'form': form})
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/create_vaccination.html', {'form': form})
+
+    return render(request, 'system_admin/dashboard.html', {'form': form})
 #LIST VACCINES
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def list_vaccinations(request):
     vaccinations = Vaccination.objects.all()
-    return render(request, 'system_admin/list_vaccinations.html', {'vaccinations': vaccinations})
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'system_admin/partials/list_vaccinations.html', {'vaccinations': vaccinations})
+    
+    return render(request, 'system_admin/dashboard.html', {'vaccinations': vaccinations})
 #end
 
     

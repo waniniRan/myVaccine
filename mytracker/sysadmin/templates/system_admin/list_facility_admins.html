@@ -1,26 +1,12 @@
-<h2>Registered Facility Admins</h2>
-
-<table border="1">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Assigned Facility</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for admin in admins %}
-            <tr>
-                <td>{{ admin.user.username }}</td>
-                <td>{{ admin.user.email }}</td>
-                <td>{{ admin.facility.name }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="3">No facility admins registered.</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+<div class="card">
+  <h2>Facility Admins</h2>
+  <table>
+    <tr><th>Name</th><th>facility</th></tr>
+    {% for admin in admins %}
+    <tr>
+      <td>{{ admin.name }}</td>
+      <td>{{ admin.facility }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>

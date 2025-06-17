@@ -1,33 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
   <link rel="stylesheet" href="{% static 'system_admin/css/dashboard.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <header>
     <h1>System Admin Dashboard</h1>
-    <p>Welcome, {{ request.user.username }}!</p>
+    <div class="dropdown">
+      <button class="dropbtn">Menu ▼</button>
+      <div class="dropdown-content">
+        <a href="{% url 'register_facility' %}" class="load-content">➕ Register New Health Facility</a>
+        <a href="{% url 'create_vaccine' %}" class="load-content">💉 Add Vaccine</a>
+        <a href="{% url 'create_facility_admin' %}" class="load-content">👤 Create Facility Admin</a>
+        <a href="{% url 'list_facility_admins' %}"class="load-content">👥 View Facility Admins</a>
+        <a href="{%url 'list_facilities'%}" class="load-content">🏥 View Registered Facilities</a>
+        <a href="{% url 'list_vaccinations' %}" class="load-content">📋 View Vaccines</a>
 
-    <nav>
-      <ul>
-  <li><a href="{% url 'register_facility' %}">➕ Register New Health Facility</a></li>
-  <li><a href="{% url 'create_vaccine' %}">💉 Register New Vaccine</a></li>
-  <li><a href="{% url 'create_facility_admin' %}">👤 Create Facility Admin</a></li>
-  <li><a href="{% url 'list_facility_admins' %}">👥 View Facility Admins</a></li>
-  <li><a href="{%url 'list_facilities'%}">🏥 View Registered Facilities</a></li>
-  <li><a href="{% url 'list_vaccinations' %}">📋 View Vaccinations</a></li>
-      </ul>
-      <a href="{% url 'logout' %}">Log Out</a>
-    </nav>
+         <a href="{% url 'logout' %}" class="load-content">Log Out</a>
+      </div>
+    </div>
   </header>
 
-  <main>
-    {% block content %}
-    <!-- dynamic content here -->
-    {% endblock %}
+  <main id="main-content">
+    <p>Welcome! Select a menu option to begin.</p>
   </main>
+
+  <script>
+    // Use AJAX to load page content into main
+    $(document).ready(function() {
+      $('.load-content').on('click', function(e) {
+        e.preventDefault(); // Stop link from navigating
+        const url = $(this).attr('href');
+        $('#main-content').load(url);
+      });
+    });
+  </script>
 </body>
 </html>
+
