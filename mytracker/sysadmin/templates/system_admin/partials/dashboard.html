@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Dashboard</title>
   <link rel="stylesheet" href="{% static 'system_admin/css/dashboard.css' %}">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
 </head>
 <body>
   <header>
@@ -29,16 +29,24 @@
     <p>Welcome! Select a menu option to begin.</p>
   </main>
 
-  <script>
-    // Use AJAX to load page content into main
-    $(document).ready(function() {
-      $('.load-content').on('click', function(e) {
-        e.preventDefault(); // Stop link from navigating
-        const url = $(this).attr('href');
-        $('#main-content').load(url);
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>  
+  $(document).ready(function() {
+    $('.load-content').on('click', function(e) {
+      e.preventDefault();
+      const url = $(this).attr('href');
+      console.log("Loading URL:", url); // ✅ Test log
+      $('#main-content').load(url, function(response, status, xhr) {
+        if (status === "error") {
+          console.error("Error loading page:", xhr.status, xhr.statusText);
+          $('#main-content').html("<p>Error loading content.</p>");
+        }
       });
     });
-  </script>
+  });
+</script>
+
+  
 </body>
 </html>
 

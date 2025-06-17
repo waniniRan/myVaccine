@@ -10,12 +10,12 @@ header {
   background-color: #007bff;
   color: white;
   padding: 20px;
-  position: relative;
+  position:relative;
 }
 
 .dropdown {
   position: absolute;
-  right: 20px;
+  left: 20px;
   top: 20px;
 }
 

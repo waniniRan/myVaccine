@@ -26,7 +26,7 @@ def dashboard (request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def system_admin_dashboard(request):
-     return render(request, 'system_admin/dashboard.html')   
+     return render(request, 'system_admin/partials/dashboard.html')   
 #end
 
 
@@ -55,7 +55,7 @@ def list_health_facilities(request):
    facilities =healthfacility.objects.all()
 
    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return render(request, 'system_admin/partials/list_health_facilities.html', {'facilities': facilities}) 
+        return render(request, 'system_admin/partials/list_facilities.html', {'facilities': facilities}) 
    
    return render(request, 'system_admin/dashboard.html',{'facilities': facilities}) 
 #end
@@ -101,13 +101,14 @@ def list_facility_admins(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def create_vaccination(request):
+    form = Vaccinationform()
     if request.method == 'POST':
         form = Vaccinationform(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponse("Vaccine registered successfully.")
-    else:
-        form = Vaccinationform()
+    
+       
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return render(request, 'system_admin/partials/create_vaccination.html', {'form': form})
